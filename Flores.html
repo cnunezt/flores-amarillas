@@ -1,0 +1,273 @@
+!doctype html
+html lang=es
+head
+meta charset=utf-8 
+meta name=viewport content=width=device-width,initial-scale=1 
+titleFlores Amarillas 🌼 — Un detalle para tititle
+
+!-- Open Graph (para preview en WhatsApp  redes). Para que funcione bien, sube una imagen pública y cambia la URL de ogimage --
+meta property=ogtitle content=Flores Amarillas — Un detalle para ti 
+meta property=ogdescription content=Abre para ver unas flores amarillas y un saludo especial. 
+meta property=ogimage content=httpsexample.compreview-flores.jpg 
+meta property=ogtype content=website 
+
+style
+  root{
+    --bg#0b1020;
+    --card#0f1724;
+    --accent#ffd54a;  amarillo flor 
+    --accent-dark#ffb300;
+    --glass rgba(255,255,255,0.04);
+  }
+  html,body{height100%; margin0; font-family Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial; background radial-gradient(ellipse at 10% 10%, rgba(255,220,120,0.03), transparent 10%), linear-gradient(180deg,var(--bg), #071026 80%); color #e9eef8; -webkit-font-smoothingantialiased;}
+  .wrap{
+    min-height100vh; displayflex; align-itemscenter; justify-contentcenter; padding28px;
+  }
+  .card{
+    width980px; max-width100%; border-radius18px; padding28px; backgroundlinear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow 0 10px 30px rgba(2,6,23,0.6); backdrop-filter blur(6px);
+    displaygrid; grid-template-columns 1fr 420px; gap24px; align-itemscenter;
+  }
+
+   Left mensaje 
+  .msg{
+    padding10px 14px;
+  }
+  .greeting{
+    font-size28px; margin0 0 8px 0; color #fff;
+  }
+  .subtitle{ color#cbd5e1; margin0 0 18px 0; font-size15px;}
+  .note{
+    backgroundvar(--glass); border-radius10px; padding12px; color#dbe6ff; font-size14px;
+  }
+
+   Right jardín con flores 
+  .garden{
+    positionrelative; height340px; displayflex; align-itemscenter; justify-contentcenter; overflowhidden;
+  }
+  .ground{
+    positionabsolute; left0; right0; bottom0; height80px; background linear-gradient(180deg,#0b1a2b, #041021); border-top-left-radius30px; border-top-right-radius30px;
+    box-shadow inset 0 8px 20px rgba(0,0,0,0.7);
+  }
+
+   Flower base styles 
+  .flower{
+    positionabsolute; bottom50px; displayflex; align-itemscenter; justify-contentcenter; transform-origin center bottom;
+  }
+  .stem{
+    width6px; height160px; background linear-gradient(#2b6b3a, #184b2a); border-radius6px;
+    transform-origin center top;
+    box-shadow 0 2px 6px rgba(0,0,0,0.6);
+  }
+  .center{
+    width28px; height28px; border-radius50%; background radial-gradient(circle at 30% 30%, #fff3c9, #ffef96 40%, #ffcc00 100%); displayflex; align-itemscenter; justify-contentcenter; box-shadow 0 6px 18px rgba(0,0,0,0.35);
+  }
+  .petals{
+    positionabsolute; width120px; height120px; displayblock; pointer-eventsnone;
+  }
+
+   Petal shapes using pseudo SVG-like circles (CSS) 
+  .petal{
+    positionabsolute; width46px; height70px; background radial-gradient(circle at 35% 25%, #fff7d2 0%, #ffd54a 35%, #ffb300 100%); border-radius 60% 60% 40% 40%;
+    transform-origin center 60%;
+    box-shadow 0 6px 18px rgba(0,0,0,0.2);
+  }
+  .p1{ left50%; top4%; transformtranslateX(-50%) rotate(0deg); }
+  .p2{ left79%; top20%; transform translate(-50%,-50%) rotate(50deg); }
+  .p3{ left68%; top54%; transform translate(-50%,-50%) rotate(110deg); }
+  .p4{ left32%; top54%; transform translate(-50%,-50%) rotate(-110deg); }
+  .p5{ left21%; top20%; transform translate(-50%,-50%) rotate(-50deg); }
+
+   Each flower unique position 
+  .f1{ left46%; bottom36px; transform scale(1.1); }
+  .f2{ left24%; bottom30px; transform scale(0.95); }
+  .f3{ left75%; bottom28px; transform scale(1.0); }
+  .f4{ left12%; bottom18px; transform scale(0.85); }
+  .f5{ left90%; bottom10px; transform scale(0.78); }
+
+   Animations sway stems + float whole flower + occasional sparkle 
+  @keyframes sway {
+    0%{ transform rotate(-4deg); }
+    50%{ transform rotate(6deg); }
+    100%{ transform rotate(-4deg); }
+  }
+  @keyframes floaty {
+    0%{ transform translateY(0) rotate(0deg); }
+    50%{ transform translateY(-6px) rotate(0.5deg); }
+    100%{ transform translateY(0) rotate(0deg); }
+  }
+  @keyframes pulseCenter {
+    0%{ transform scale(1); filter blur(0); opacity1; }
+    50%{ transform scale(1.06); filter blur(0.2px); opacity0.98; }
+    100%{ transform scale(1); filter blur(0); opacity1; }
+  }
+
+  .stem { animation sway 4s ease-in-out infinite; }
+  .flower { animation floaty 6s ease-in-out infinite; }
+  .center { animation pulseCenter 3.6s ease-in-out infinite; }
+
+   small sparkle 
+  .sparkle{
+    positionabsolute; width8px; height8px; border-radius50%;
+    background linear-gradient(180deg,#fff6c8,#ffd54a); opacity0.9; filter blur(.2px);
+    animation spark 2s linear infinite;
+  }
+  @keyframes spark {
+    0%{ transform translate(-10px,-200px) scale(.4); opacity0; }
+    20%{ opacity1; }
+    100%{ transform translate(80px, 40px) scale(.1); opacity0; }
+  }
+
+   footer share area 
+  .actions{ margin-top18px; displayflex; gap12px; align-itemscenter; flex-wrapwrap;}
+  .btn{
+    backgroundlinear-gradient(180deg,var(--accent), var(--accent-dark)); color#07202a; bordernone; padding10px 14px; border-radius12px; font-weight700; cursorpointer; box-shadow0 8px 20px rgba(255,180,40,0.12);
+  }
+  .linkbox{
+    backgroundrgba(255,255,255,0.03); padding10px; border-radius10px; font-size13px; color#cfe7ff; overflowhidden; text-overflowellipsis; white-spacenowrap;
+    max-width380px;
+  }
+
+   Responsive move to column on small screens 
+  @media (max-width880px){
+    .card{ grid-template-columns 1fr; padding18px; gap16px; }
+    .garden{ height280px; }
+  }
+style
+head
+body
+  div class=wrap
+    div class=card role=main
+      div class=msg
+        h1 class=greeting id=greetingUn detalle para ti 🌼h1
+        p class=subtitle id=subtitleAbre y encuentra unas flores amarillas animadas — y tu nombre aparecerá aquí.p
+
+        div class=note
+          div id=personalTextSi abriste con tu nombre en la URL, verás un saludo personalizado. Ejemplo codename=Anacodediv
+        div
+
+        div class=actions
+          button class=btn id=btn-copyCopiar enlace personalizadobutton
+          button class=btn id=btn-whatsappAbrir en WhatsApp Web (compartir)button
+          div class=linkbox id=linkboxLink —div
+        div
+
+      div
+
+      div class=garden aria-hidden=false
+        !-- Ground --
+        div class=ground aria-hidden=truediv
+
+        !-- Several flowers --
+        div class=flower f1 tabindex=0
+          div class=petals aria-hidden=true
+            div class=petal p1div
+            div class=petal p2div
+            div class=petal p3div
+            div class=petal p4div
+            div class=petal p5div
+          div
+          div class=center aria-hidden=truediv
+          div class=stem aria-hidden=truediv
+        div
+
+        div class=flower f2 tabindex=0 style=animation-duration5.5s
+          div class=petals aria-hidden=true
+            div class=petal p1 style=width42px;height64pxdiv
+            div class=petal p2div
+            div class=petal p3div
+            div class=petal p4div
+            div class=petal p5div
+          div
+          div class=center aria-hidden=truediv
+          div class=stem style=height140px aria-hidden=truediv
+        div
+
+        div class=flower f3 tabindex=0 style=animation-duration6.8s
+          div class=petals aria-hidden=true
+            div class=petal p1div
+            div class=petal p2div
+            div class=petal p3div
+            div class=petal p4div
+            div class=petal p5div
+          div
+          div class=center aria-hidden=truediv
+          div class=stem aria-hidden=truediv
+        div
+
+        div class=flower f4 tabindex=0 style=animation-duration6.2s
+          div class=petals aria-hidden=true
+            div class=petal p1div
+            div class=petal p2div
+            div class=petal p3div
+            div class=petal p4div
+            div class=petal p5div
+          div
+          div class=center aria-hidden=truediv
+          div class=stem aria-hidden=truediv
+        div
+
+        div class=flower f5 tabindex=0 style=animation-duration7.2s
+          div class=petals aria-hidden=true
+            div class=petal p1div
+            div class=petal p2div
+            div class=petal p3div
+            div class=petal p4div
+            div class=petal p5div
+          div
+          div class=center aria-hidden=truediv
+          div class=stem aria-hidden=truediv
+        div
+
+      div
+    div
+  div
+
+script
+   lee parámetro name= y personaliza
+  function getParam(name){
+    const url = new URL(location.href);
+    return url.searchParams.get(name)  '';
+  }
+  function escapeHtml(s){ return s.replace([&']g, function(m){ return ({'&''&amp;','''&lt;','''&gt;','''&quot;',''&#39;'}[m]); }); }
+
+  const name = getParam('name');
+  const greeting = document.getElementById('greeting');
+  const subtitle = document.getElementById('subtitle');
+  const personalText = document.getElementById('personalText');
+  const linkbox = document.getElementById('linkbox');
+
+  if(name.trim().length){
+    const safe = escapeHtml(name.trim());
+    greeting.textContent = `Para ${safe} — ¡con cariño! 🌼`;
+    subtitle.textContent = `Estas flores te saludan, ${safe}.`;
+    personalText.textContent = `Mensaje Hola ${safe}, espero que te guste este detalle.`;
+  }
+
+   Construir link actual (para copiarcompartir)
+  const currentLink = location.origin + location.pathname + (name  'name=' + encodeURIComponent(name)  '');
+  linkbox.textContent = currentLink;
+
+   Botones copiar
+  document.getElementById('btn-copy').addEventListener('click', async ()={
+    try{
+      await navigator.clipboard.writeText(currentLink);
+      alert('Enlace copiado al portapapeles. Pégalo en WhatsApp o comparte donde quieras.');
+    }catch(e){
+      prompt('Copia manualmente este enlace', currentLink);
+    }
+  });
+
+   Abrir Whatsapp Web con mensaje prellenado
+  document.getElementById('btn-whatsapp').addEventListener('click', ()={
+    const text = encodeURIComponent((name  `Hola ${name}! `  'Hola! ') + 'mira este detalle ' + currentLink);
+    const whatsappUrl = `httpsweb.whatsapp.comsendtext=${text}`;
+    window.open(whatsappUrl, '_blank');
+  });
+
+   accesibilidad focus visible style small
+  document.addEventListener('keydown', (e)={
+    if(e.key === 'Tab') document.body.classList.add('show-focus');
+  });
+script
+body
+html
